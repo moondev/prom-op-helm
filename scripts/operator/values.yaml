@@ -266,7 +266,7 @@ alertmanager:
     storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: rook-ceph-block
+          storageClassName: openebs-jiva-default
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
@@ -1387,7 +1387,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: rook-ceph-block
+          storageClassName: openebs-jiva-default
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:

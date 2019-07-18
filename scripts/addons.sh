@@ -12,8 +12,13 @@ kubectl get nodes
 kubectl get pods --all-namespaces
 
 
-helm repo add rook-release https://charts.rook.io/release
-sleep 10
-helm install --namespace rook-ceph rook-release/rook-ceph
+# helm repo add rook-release https://charts.rook.io/release
+# sleep 10
+# helm install --namespace rook-ceph rook-release/rook-ceph
+
+helm install --namespace openebs --name openebs stable/openebs
+sleep 30
+kubectl apply -f https://raw.githubusercontent.com/openebs/openebs/master/k8s/demo/pvc-standard-jiva-default.yaml
+
 sleep 10
 helm install --name prom-op --namespace prom-op stable/prometheus-operator -f /scripts/operator/values.yaml
