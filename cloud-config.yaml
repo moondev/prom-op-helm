@@ -1,0 +1,14 @@
+#cloud-config
+# users:
+#   - name: root
+runcmd:
+  - sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  - sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list"
+  - sudo apt-get update
+  - sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
+  - sudo apt-get update && sudo apt-get install -y docker-ce=$(apt-cache madison docker-ce | grep ${DOCKER} | head -1 | awk '{print $3}')
+  - sudo apt-get install -y kubelet=${K8S}-00 kubeadm=${K8S}-00 kubectl=${K8S}-00 kubernetes-cni=${CNI}-00
+  - sudo sysctl net.bridge.bridge-nf-call-iptables=1

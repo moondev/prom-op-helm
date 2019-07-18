@@ -1,0 +1,1 @@
+helm install --name prom-op stable/prometheus-operator --namespace prom-op -f values.yaml
